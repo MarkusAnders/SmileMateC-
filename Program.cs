@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SmileMate.Common;
 
 namespace SmileMate
@@ -13,6 +14,8 @@ namespace SmileMate
 
             builder.Services.AddDbContext<SmileMateContext>();
 
+            Busket.FillDb();
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,6 +34,16 @@ namespace SmileMate
             app.UseAuthorization();
 
             app.MapRazorPages();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var provider = scope.ServiceProvider;
+                using (var context = new SmileMateContext())
+                {
+                    if (context.Database.GetPendingMigrations().Any())
+                        context.Database.Migrate();
+                }
+            }
 
             app.Run();
         }
