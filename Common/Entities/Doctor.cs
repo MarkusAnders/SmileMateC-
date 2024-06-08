@@ -1,17 +1,8 @@
-﻿using SmileMate.Common.Enums;
-
-namespace SmileMate.Common.Entities
+﻿namespace SmileMate.Common.Entities
 {
-    public class Doctor
+    public class Doctor : User
     {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Patronymic { get; set; }
-
-        public TimeOnly StartTime { get; set; } 
-        public TimeOnly EndTime { get; set; }
-
+        public List<Schedule> Schedules { get; set; } = new();
         public long ReceptionId { get; set; }
         public Reception Reception { get; set; }
     }

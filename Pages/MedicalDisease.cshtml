@@ -1,0 +1,70 @@
+﻿@page
+@model MedicalDiseaseModel
+@{
+    ViewData["Title"] = "SmileMate - История болезни";
+}
+
+    <h1 class="disease-title main-title">История болезни</h1>
+    <section class="disease">
+        <div class="container">
+            <div class="disease-wrapper">
+                <div class="disease-card">
+                    <div class="disease-left">
+                        <h2 class="disease-patient">Тихонов Сергей Денисович</h2>
+                        <p class="disease-date form-label">Дата посещения: <span>12.02.2024</span></p>
+                        <p class="disease-doctor form-label">Врач: <span>Андронов Илья Андреевич</span></p>
+                        <p class="disease-diagnosis form-label">Диагноз: <span>Киста</span></p>
+                        <p class="disease-treatment form-label">Оказаное лечение: <span>Было оказано то-то се-то и вот это. После это было сделано это и поэтому надо было сделать так.</span></p>
+                        <p class="disease-price form-label">Стоимость: <span>25000 рублей</span></p>
+                        <div class="disease-btns disease-btns--wrap">
+                            <a asp-page="/MedicalDiseaseEdit" class="disease-btn--edit main-btn">Редактировать</a>
+                            <a class="disease-btn--delete second-btn">Удалить</a>
+                        </div>
+                    </div>
+                    <div class="disease-rigth">
+                        <h2 class="disease-name">Снимки</h2>
+
+                        <!-- Slider main container -->
+                        <div class="disease-swiper  swiper">
+                            <!-- Additional required wrapper -->
+                            <div class="disease-swiper--container swiper-container">
+                                <div class="disease-swiper--wrapper swiper-wrapper">
+                                <!-- Slides -->
+                                    <div class="disease-swiper--slide swiper-slide">
+                                        <a data-fslightbox="gallery" href="/img/snimok.jpg">
+                                            <img class="disease-swiper--img" src="/img/snimok.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="disease-swiper--slide swiper-slide">
+                                        <a data-fslightbox="gallery" href="/img/snimok.jpg">
+                                            <img class="disease-swiper--img" src="/img/snimok.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="disease-swiper--slide swiper-slide">
+                                        <a data-fslightbox="gallery" href="/img/snimok.jpg">
+                                            <img class="disease-swiper--img" src="/img/snimok.jpg" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- If we need pagination -->
+                                <div class="swiper-pagination"></div>
+
+                                <!-- If we need navigation buttons -->
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="disease-back-btn">
+                    <button class="back-btn">
+                        <svg class="back-btn--icon" width="29" height="19" viewBox="0 0 29 19"  xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.3333 5.07867V1.66667C14.3327 1.40318 14.2282 1.1457 14.0328 0.926695C13.8375 0.707689 13.5601 0.536953 13.2355 0.436003C12.911 0.335053 12.5539 0.308406 12.2092 0.359421C11.8645 0.410435 11.5477 0.536829 11.2986 0.722672L0.111084 9.00001L11.2986 17.276C11.4634 17.4003 11.6592 17.4989 11.8749 17.5661C12.0906 17.6334 12.3219 17.6681 12.5555 17.6681C12.7891 17.6681 13.0205 17.6334 13.2362 17.5661C13.4519 17.4989 13.6477 17.4003 13.8124 17.276C13.9776 17.1523 14.1086 17.0053 14.198 16.8436C14.2874 16.6818 14.3334 16.5084 14.3333 16.3333V13.0147C19.2222 13.1053 24.5644 13.7693 28.5555 18.3333V17C28.5555 10.8227 22.3333 5.74267 14.3333 5.07867Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+

@@ -1,0 +1,90 @@
+﻿@page
+@model MedicalHistoryModel
+@{
+    ViewData["Title"] = "SmileMate - Медициская история";
+}
+
+    <h1 class="history-title main-title">История посещений</h1>
+    <section class="history">
+        <div class="container">
+            <div class="history-wrapper">
+                <div class="history-top">
+                    <a asp-page="" class="history-nametitle">Тихонов Сергей Денисович</a>
+                    <div class="history-border"></div>
+                    <form action="#" class="history-search">
+                        <div class="search-wrapper">
+                            <input type="text" class="history-search--input search-input" placeholder="Поиск...">
+                            <button class="instrument-search--btn">
+                                <img class="instrument-search--icon" src="/img/icon/search.svg">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="history-bottom">
+                    <ul class="history-list">
+                        <li class="history-item">
+                            <a asp-page="/MedicalDisease" class="history-link">
+                                <div class="history-card">
+                                    <div class="history-content">
+                                        <p class="history-card-date">12.02.2024</p>
+                                        <p class="history-card--doctor form-label">Врач: <span>Андронов Илья Андреевич</span></p>
+                                        <p class="history-card--diagnosis form-label">Диагноз: <span>Киста</span></p>
+                                        <p class="history-card--diagnosis form-label">Стоимость: <span>17000</span> руб.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="history-item">
+                            <a asp-page="/MedicalDisease" class="history-link">
+                                <div class="history-card">
+                                    <div class="history-content">
+                                        <p class="history-card-date">12.02.2024</p>
+                                        <p class="history-card--doctor form-label">Врач: <span>Андронов Илья Андреевич</span></p>
+                                        <p class="history-card--diagnosis form-label">Диагноз: <span>Киста</span></p>
+                                        <p class="history-card--diagnosis form-label">Стоимость: <span>17000</span> руб.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="history-item">
+                            <a asp-page="/MedicalDisease" class="history-link">
+                                <div class="history-card">
+                                    <div class="history-content">
+                                        <p class="history-card-date">12.02.2024</p>
+                                        <p class="history-card--doctor form-label">Врач: <span>Андронов Илья Андреевич</span></p>
+                                        <p class="history-card--diagnosis form-label">Диагноз: <span>Киста</span></p>
+                                        <p class="history-card--diagnosis form-label">Стоимость: <span>17000</span> руб.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="history-item">
+                            <a asp-page="/MedicalDisease" class="history-link">
+                                <div class="history-card">
+                                    <div class="history-content">
+                                        <p class="history-card-date">12.02.2024</p>
+                                        <p class="history-card--doctor form-label">Врач: <span>Андронов Илья Андреевич</span></p>
+                                        <p class="history-card--diagnosis form-label">Диагноз: <span>Киста</span></p>
+                                        <p class="history-card--diagnosis form-label">Стоимость: <span>17000</span> руб.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="history-item">
+                            <a asp-page="/MedicalDisease" class="history-link">
+                                <div class="history-card">
+                                    <div class="history-content">
+                                        <p class="history-card-date">12.02.2024</p>
+                                        <p class="history-card--doctor form-label">Врач: <span>Андронов Илья Андреевич</span></p>
+                                        <p class="history-card--diagnosis form-label">Диагноз: <span>Киста</span></p>
+                                        <p class="history-card--diagnosis form-label">Стоимость: <span>17000</span> руб.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+

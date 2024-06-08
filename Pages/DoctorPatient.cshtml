@@ -1,0 +1,47 @@
+﻿@page
+@model DoctorPatient
+@{
+    ViewData["Title"] = "SmileMate - Врачи";
+}
+
+<section class="doctor">
+        <div class="container">
+            <div class="doctor-wrapper">
+                <h1 class="doctor-title main-title">Мои приемы сегодня</h1>
+                <div class="reception-table table">
+                    <table class="reception-table--wrapper table-wrapper">
+                        <thead>
+                            <tr>
+                                <th>Клиент</th>
+                                <th>Время</th>
+                                <th>Действие</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Тихонов Сергей Денисович</td>
+                                <td>8:30</td>
+                                <td>
+                                    <a asp-page="/MedicalDiseaseCreate" class="table-btn table-btn--history second-btn">Создать посещение</a>
+                                </td>
+                                <td>
+                                    <a class="table-btn table-btn--close second-btn">Закрыть</a>
+                                </td>
+                            </tr>
+                            <tr class="doctor-passed">
+                                <td>Тихонов Сергей Денисович</td>
+                                <td>8:30</td>
+                                <td>
+                                    <a asp-page="/MedicalDiseaseCreate" class="table-btn table-btn--history second-btn">Создать посещение</a>
+                                </td>
+                                <td>
+                                    <a class="table-btn table-btn--close second-btn">Закрыть</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>

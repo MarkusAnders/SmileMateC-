@@ -1,0 +1,34 @@
+﻿@page
+@model PatientDetails
+@{
+    ViewData["Title"] = "SmileMate - Редактирование клиента";
+}
+
+
+    <section class="client-detail detail">
+        <div class="container">
+            <div class="detail-wrapper form-wrapper">
+                <div class="detail-form form">
+                    <h2 class="detail-form--title mini-form--title">Личные данные</h2>
+                    <div class="details-form-info">
+                        <h3 class="detail-form--patient">Тихонов Сергей Денисович</h3>
+                        <p class="detail-form-date form-label">Дата рождения: <span>01.04.2002</span></p>
+                        <p class="detail-form-date form-label">Номер телефона: <span>89535507494</span></p>
+                        <p class="detail-form-date form-label">Почта <span>ser.play02@mail.ru</span></p>
+                        <p class="detail-form-date form-label">Адрес: <span>ул. Белохвостикова, д.5</span></p>
+                    </div>
+                    <div class="detail-form--btn form-btn">
+                        <a asp-page="/PatientEdit" class="form-btn--edit main-btn">Редактировать</a>
+                        <a class="form-btn--delete second-btn">Удалить</a>
+                    </div>
+                </div>
+                <div class="client-detail-back-btn">
+                    <button class="detail-back-btn back-btn">
+                        <svg class="back-btn--icon" width="29" height="19" viewBox="0 0 29 19"  xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.3333 5.07867V1.66667C14.3327 1.40318 14.2282 1.1457 14.0328 0.926695C13.8375 0.707689 13.5601 0.536953 13.2355 0.436003C12.911 0.335053 12.5539 0.308406 12.2092 0.359421C11.8645 0.410435 11.5477 0.536829 11.2986 0.722672L0.111084 9.00001L11.2986 17.276C11.4634 17.4003 11.6592 17.4989 11.8749 17.5661C12.0906 17.6334 12.3219 17.6681 12.5555 17.6681C12.7891 17.6681 13.0205 17.6334 13.2362 17.5661C13.4519 17.4989 13.6477 17.4003 13.8124 17.276C13.9776 17.1523 14.1086 17.0053 14.198 16.8436C14.2874 16.6818 14.3334 16.5084 14.3333 16.3333V13.0147C19.2222 13.1053 24.5644 13.7693 28.5555 18.3333V17C28.5555 10.8227 22.3333 5.74267 14.3333 5.07867Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>

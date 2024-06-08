@@ -1,0 +1,45 @@
+﻿@page
+@model ReceptionEdit
+@{
+    ViewData["Title"] = "SmileMate - Редактирование приема";
+}
+
+
+<section class="reception-create">
+    <div class="container">
+        <h2 class="reception-create--title main-title">Редактировать прием</h2>
+        <div class="reception-create--wrapper">
+            <h2 class="popup-title reception-patient">Тихонов Сергей Денисович</h2>
+                <form class="popup-form">
+                    
+                    <label class="input-label">Врач</label>
+                    <div class="select">
+                        <select class="input-doctor" name="format" id="format">
+                            <option selected disabled>Выберите врача</option>
+                            <option value="">Андронов Илья Андреевич</option>
+                            <option value="">Бличенков Антон Игоревич</option>
+                        </select>
+                    </div>
+
+                    <label class="input-label">Дата</label>
+                    <div class="select">
+                        <select class="input-doctor" name="format" id="format">
+                            <option selected disabled>Выберите дату</option>
+                            <option value="">07.06</option>
+                        <option value="">08.06</option>
+                        </select>
+                    </div>
+
+                    <label class="input-label">Время</label>
+                    <div class="select">
+                        <select class="input-doctor" name="format" id="format">
+                            <option selected disabled>Выберите врача</option>
+                            <option value="">8:00</option>
+                        <option value="">8:30</option>
+                        </select>
+                    </div>
+                    <button class="popup-btn main-btn">Редактировать</button>
+                </form>
+        </div>
+    </div>
+</section>

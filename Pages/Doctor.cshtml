@@ -1,0 +1,54 @@
+﻿@page
+@model DoctorModel
+@{
+    ViewData["Title"] = "SmileMate - Врачи";
+}
+
+<section class="doctor">
+        <div class="container">
+            <div class="doctor-wrapper">
+                <h1 class="doctor-title main-title">Врачи</h1>
+                <div class="client-instrument instrument">
+                    <form action="#" class="doctor-search search">
+                    <div class="search-wrapper">
+                        <input type="text" class="doctor-search--input search-input" placeholder="Поиск...">
+                        <button class="instrument-search--btn">
+                            <img class="instrument-search--icon" src="/img/icon/search.svg">
+                        </button>
+                        </div>
+                    </form>
+                    <div class="instrument-border"></div>
+                    <a asp-page="/DoctorCreate" class="instrument-btn main-btn">Зарегистрировать</a>
+                </div>
+                
+                <div class="doctor-table table">
+                    <table class="doctor-table--wrapper table-wrapper">
+                        <thead>
+                            <tr>
+                                <th>Фамилия</th>
+                                <th>Имя</th>
+                                <th>Отчество</th>
+                                <th>Почта</th>
+                                <th>Действие</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Андронов</td>
+                                <td>Илья</td>
+                                <td>Андреевич</td>
+                                <td>andronov-ilya@smilemate.ru</td>
+                                <td>
+                                    <a asp-page="/DoctorEdit" class="table-btn table-btn--info second-btn">Редактировать</a>
+                                </td>
+                                <td>
+                                    <a class="table-btn table-btn--info second-btn">Удалить</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>

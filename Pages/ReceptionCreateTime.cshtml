@@ -1,0 +1,40 @@
+﻿@page
+@model ReceptionCreateTime
+@{
+    ViewData["Title"] = "SmileMate - Запись на прием";
+}
+
+<section class="reception-create">
+    <div class="container">
+        <h2 class="reception-create--title main-title">Запись на прием</h2>
+        <div class="reception-create--wrapper">
+            <h2 class="popup-title reception-patient">Тихонов Сергей Денисович</h2>
+                <form class="popup-form">
+                    <label class="input-label">Время</label>
+                    <div class="select">
+                        <select class="input-doctor" name="format" id="format">
+                            <option selected disabled>Выберите Время</option>
+                            <option value="">8:00</option>
+                            <option value="">8:30</option>
+                            <option value="">9:00</option>
+                            <option value="">9:30</option>
+                            <option value="">10:00</option>
+                            <option value="">10:30</option>
+                            <option value="">11:00</option>
+                            <option value="">11:30</option>
+                            <option value="">12:00</option>
+                            <option value="">12:30</option>
+                            <option value="">13:00</option>
+                            <option value="">13:30</option>
+                            <option value="">14:00</option>
+                            <option value="">14:30</option>  
+                            <option value="">15:00</option>  
+                            <option value="">15:30</option>  
+                            <option value="">16:00</option>  
+                        </select>
+                    </div>
+                    <button class="popup-btn main-btn">Записаться</button>
+                </form>
+        </div>
+    </div>
+</section>

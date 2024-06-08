@@ -1,0 +1,76 @@
+﻿@page
+@model ReceptionModel
+@{
+    ViewData["Title"] = "SmileMate - Записи приемов";
+}
+
+
+<section class="reception">
+        <div class="container">
+            <div class="reception-wrapper">
+                <h1 class="reception-title main-title">Приемы</h1>
+                <form action="#" class="reception-search search">
+                    <div class="search-wrapper">
+                        <input type="text" class="reception-search--input search-input" placeholder="Поиск...">
+                        <button class="instrument-search--btn">
+                            <img class="instrument-search--icon" src="/img/icon/search.svg">
+                        </button>
+                    </div>
+                </form>
+                <div class="reception-table table">
+                    <table class="reception-table--wrapper table-wrapper">
+                        <thead>
+                            <tr>
+                                <th>Клиент</th>
+                                <th>Врач</th>
+                                <th>Дата</th>
+                                <th>Время</th>
+                                <th></th>
+                                <th>Действие</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Тихонов Сергей Денисович</td>
+                                <td>Андронов Илья Андреевич</td>
+                                <td>07.06</td>
+                                <td>8:30</td>
+                                <td>
+                                    <a asp-page="/ReceptionEdit" class="table-btn table-btn--info second-btn">Изменить</a>
+                                </td>
+                                <td>
+                                    <a asp-page="/MedicalDiseaseCreate" class="table-btn table-btn--history second-btn">Создать посещение</a>
+                                </td>
+                                <td>
+                                    <a class="table-btn table-btn--close second-btn">Закрыть</a>
+                                </td>
+                                <td>
+                                    <a class="table-btn table-btn--delete second-btn">Удалить</a>
+                                </td>
+                            </tr>
+                            <tr class="passed">
+                                <td>Тихонов Сергей Денисович</td>
+                                <td>Андронов Илья Андреевич</td>
+                                <td>07.06</td>
+                                <td>8:30</td>
+                                <td>
+                                    <a asp-page="/ReceptionEdit" class="table-btn table-btn--info second-btn">Изменить</a>
+                                </td>
+                                <td>
+                                    <a asp-page="/MedicalDiseaseCreate" class="table-btn table-btn--history second-btn">Создать посещение</a>
+                                </td>
+                                <td>
+                                    <a class="table-btn table-btn--close second-btn">Закрыть</a>
+                                </td>
+                                <td>
+                                    <a class="table-btn table-btn--delete second-btn">Удалить</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>

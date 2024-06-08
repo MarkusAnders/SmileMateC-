@@ -4,48 +4,171 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SmileMate</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="shortcut icon" href="/img/icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/wwwroot/css/site.css">
     <link rel="stylesheet" href="~/SmileMate.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="wrapper">
+        <header class="header">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">SmileMate</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                <div class="header-wrapper">
+                    <div class="header-logotype logotype">
+                        <a asp-page="/Index" class="logotype-link">
+                            <img src="/img/icon/logotype.svg" alt="logotype SmileMate" class="logotype-icon">
+                        </a>
+                    </div>
+                    <div class="header-end">
+                        <nav class="header-menu menu">
+                            <ul class="menu-list">
+                                @if(User.Identity.IsAuthenticated && User.IsInRole("MedicalWorker"))
+                                {
+                                    <li class="menu-item menu-item--active">
+                                        <a asp-page="/Patient" class="menu-link">Клиенты</a>
+                                    </li>
+                                    <li class="menu-item menu-item--active">
+                                        <a asp-page="/Reception" class="menu-link">Приемы</a>
+                                    </li>
+                                }
+                                else if (User.Identity.IsAuthenticated && User.IsInRole("Doctor"))
+                                {
+                                    <li class="menu-item menu-item--active">
+                                        <a asp-page="/Patient" class="menu-link">Клиенты</a>
+                                    </li>
+                                    <li class="menu-item menu-item--active">
+                                        <a asp-page="/DoctorPatient" class="menu-link">Мои приемы</a>
+                                    </li>
+                                }
+                                else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                {
+                                    <li class="menu-item menu-item--active">
+                                        <a asp-page="/Patient" class="menu-link">Клиенты</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a asp-page="/Doctor" class="menu-link">Врачи</a>
+                                    </li>
+                                    <li class="menu-item menu-item--active">
+                                        <a asp-page="/Reception" class="menu-link">Приемы</a>
+                                    </li>
+                                    <li class="menu-item menu-item--active">
+                                        <a asp-page="/DoctorPatient" class="menu-link">Мои приемы</a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                        <div class="header-account account">
+                            <div class="dropdown">
+                                <button data-path="one" class=" dropdown-toggle account-link">
+                                    Аккаунт
+                                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 0C18.1217 0 20.1566 0.842854 21.6569 2.34315C23.1571 3.84344 24 5.87827 24 8C24 10.1217 23.1571 12.1566 21.6569 13.6569C20.1566 15.1571 18.1217 16 16 16C13.8783 16 11.8434 15.1571 10.3431 13.6569C8.84285 12.1566 8 10.1217 8 8C8 5.87827 8.84285 3.84344 10.3431 2.34315C11.8434 0.842854 13.8783 0 16 0ZM16 20C24.84 20 32 23.58 32 28V32H0V28C0 23.58 7.16 20 16 20Z"/>
+                                    </svg>
+                                </button>
+                                <ul data-target="one" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @if(!User.Identity.IsAuthenticated)
+                                    {
+                                        <li><a class="dropdown-item" id="popup-auth">Авторизоваться</a></li>
+                                    }
+                                    else if(User.Identity.IsAuthenticated && User.IsInRole("Doctor"))
+                                    {
+                                        <li><a class="dropdown-item" asp-page="/Profile">Профиль</a></li>
+                                        <li><a class="dropdown-item">Выйти</a></li>
+                                    }
+                                    else if (User.Identity.IsAuthenticated && User.IsInRole("MedicalWorker"))
+                                    {
+                                        <li><a class="dropdown-item" asp-page="/Profile">Профиль</a></li>
+                                        <li><a class="dropdown-item">Выйти</a></li>
+                                    }
+                                    else if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
+                                    {
+                                        <li><a class="dropdown-item" asp-page="/MedicalHistory">История посещений</a></li>
+                                        <li><a class="dropdown-item">Выйти</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a class="dropdown-item" asp-page="/Profile">Профиль</a></li>
+                                        <li><a class="dropdown-item" id="popup-reg">Зарегистрировать</a></li>
+                                        <li><a class="dropdown-item">Выйти</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
+        </header>
+    
+        <main role="main" class="main">
+                @RenderBody()
         </main>
-    </div>
+    
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-wrapper">
+                    <p class="footer-license">
+                        ООО «SmileMate», лицензия №ЛО-86-8681-01868686047
+                    </p>
+                    <!-- <p>&copy; 2024 - SmileMate - <a asp-area="" asp-page="/Privacy">Согласие на обрабоку персональных данных</a></p> -->
+                    <span>&copy; 2024 - SmileMate - <a asp-area="" asp-page="/Privacy">Политика конфидециальности</a></span>
+                </div>
+            </div>
+        </footer>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - SmileMate - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        <div id="popup-auth">
+            <div class="popup" id="popup-auth-wp">
+                <div class="popup-wrapper">
+                    <h2 class="popup-title">Авторизация</h2>
+                    <form class="popup-form">
+                        <label class="input-label">Логин</label>
+                        <input type="text" class="input-login popup-input form-input input" placeholder="Введите...">
+                        <label class="input-label">Пароль</label>
+                        <input type="text" class="input-password popup-input form-input input" placeholder="Введите...">
+                        <button class="popup-btn main-btn">Авторизоваться</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <div id="popup-reg">
+            <div class="popup" id="popup-reg-wp">
+                <div class="popup-wrapper">
+                    <h2 class="popup-title">Регистрация</h2>
+                    <form class="popup-form">
+                        <label class="input-label">Логин</label>
+                        <input type="text" class="input-login popup-input form-input input" placeholder="Введите...">
+                        <label class="input-label">Пароль</label>
+                        <input type="text" class="input-password popup-input form-input input" placeholder="Введите...">
+                        <label class="input-label">Роль</label>
+                        <div class="popup-radio">
+                            <label class="popup-radio--item">
+                                <input type="radio" name="radio" checked>
+                                <span class="popup-radio--name">Доктор</span>
+                            </label>
 
-    @await RenderSectionAsync("Scripts", required: false)
+                            <label class="popup-radio--item">
+                                <input type="radio" name="radio">
+                                <span class="popup-radio--name">Мед.Регистратор</span>
+                            </label>
+                        </div>
+                        <button class="popup-btn main-btn">Зарегистрировать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="/js/swiper.js" asp-append-version="true"></script>
+        <script src="/fslightbox.js"></script>
+        <!-- <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> -->
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="/js/dropdown.js" asp-append-version="true"></script>
+        <script src="/js/popup.js" asp-append-version="true"></script>
+        
+        @await RenderSectionAsync("Scripts", required: false)
+    </div>
 </body>
 </html>

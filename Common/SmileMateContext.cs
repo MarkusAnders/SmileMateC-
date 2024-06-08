@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SmileMate.Common.Entities;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SmileMate.Common
 {
-    public class SmileMateContext : DbContext
+    public class SmileMateContext : IdentityDbContext<User, Role, long>
     {
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Patient> Patients { get; set; }
@@ -13,7 +14,6 @@ namespace SmileMate.Common
 
         public SmileMateContext()
         {
-            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
