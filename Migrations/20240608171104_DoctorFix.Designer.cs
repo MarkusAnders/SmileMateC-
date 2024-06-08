@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SmileMate.Common;
@@ -11,9 +12,11 @@ using SmileMate.Common;
 namespace SmileMate.Migrations
 {
     [DbContext(typeof(SmileMateContext))]
-    partial class SmileMateContextModelSnapshot : ModelSnapshot
+    [Migration("20240608171104_DoctorFix")]
+    partial class DoctorFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -342,7 +345,7 @@ namespace SmileMate.Migrations
                     b.Property<DateTime>("BirthdayDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<long?>("ReceptionId")
+                    b.Property<long>("ReceptionId")
                         .HasColumnType("bigint");
 
                     b.HasIndex("ReceptionId")
@@ -437,7 +440,9 @@ namespace SmileMate.Migrations
                 {
                     b.HasOne("SmileMate.Common.Entities.Reception", "Reception")
                         .WithOne("Client")
-                        .HasForeignKey("SmileMate.Common.Entities.Patient", "ReceptionId");
+                        .HasForeignKey("SmileMate.Common.Entities.Patient", "ReceptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Reception");
                 });

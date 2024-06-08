@@ -5,7 +5,7 @@
         public DateTime BirthdayDate { get; set; }
         public string Address { get; set; }
         
-        public long ReceptionId { get; set; }
-        public Reception Reception { get; set; }
+        public long? ReceptionId { get; set; }
+        public Reception? Reception { get; set; }
     }
 }

@@ -53,9 +53,6 @@
                                     <li class="menu-item menu-item--active">
                                         <a asp-page="/Reception" class="menu-link">Приемы</a>
                                     </li>
-                                    <li class="menu-item menu-item--active">
-                                        <a asp-page="/DoctorPatient" class="menu-link">Мои приемы</a>
-                                    </li>
                                 }
                             </ul>
                         </nav>
@@ -70,28 +67,40 @@
                                 <ul data-target="one" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     @if(!User.Identity.IsAuthenticated)
                                     {
-                                        <li><a class="dropdown-item" id="popup-auth">Авторизоваться</a></li>
+                                        <li>
+                                            <a class="dropdown-item" id="popup-auth">Авторизоваться</a>
+                                        </li>
                                     }
                                     else if(User.Identity.IsAuthenticated && User.IsInRole("Doctor"))
                                     {
                                         <li><a class="dropdown-item" asp-page="/Profile">Профиль</a></li>
-                                        <li><a class="dropdown-item">Выйти</a></li>
+                                        <form method="post" asp-page="/Authorization" asp-page-handler="Logout">
+                                            <button class="dropdown-item">Выйти</button>
+                                        </form>
                                     }
                                     else if (User.Identity.IsAuthenticated && User.IsInRole("MedicalWorker"))
                                     {
                                         <li><a class="dropdown-item" asp-page="/Profile">Профиль</a></li>
-                                        <li><a class="dropdown-item">Выйти</a></li>
+                                        <form method="post" asp-page="/Authorization" asp-page-handler="Logout">
+                                            <button class="dropdown-item">Выйти</button>
+                                        </form>
                                     }
                                     else if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
                                     {
                                         <li><a class="dropdown-item" asp-page="/MedicalHistory">История посещений</a></li>
-                                        <li><a class="dropdown-item">Выйти</a></li>
+                                        <li>
+                                            <form method="post" asp-page="/Authorization" asp-page-handler="Logout">
+                                                <button class="dropdown-item">Выйти</button>
+                                            </form>
+                                        </li>
                                     }
                                     else
                                     {
                                         <li><a class="dropdown-item" asp-page="/Profile">Профиль</a></li>
                                         <li><a class="dropdown-item" id="popup-reg">Зарегистрировать</a></li>
-                                        <li><a class="dropdown-item">Выйти</a></li>
+                                        <form method="post" asp-page="/Authorization" asp-page-handler="Logout">
+                                            <button class="dropdown-item">Выйти</button>
+                                        </form>
                                     }
                                 </ul>
                             </div>
@@ -121,12 +130,12 @@
             <div class="popup" id="popup-auth-wp">
                 <div class="popup-wrapper">
                     <h2 class="popup-title">Авторизация</h2>
-                    <form class="popup-form">
+                    <form method="post" asp-page="/Authorization" asp-page-handler="Login" class="popup-form">
                         <label class="input-label">Логин</label>
-                        <input type="text" class="input-login popup-input form-input input" placeholder="Введите...">
+                        <input name="login" type="text" class="input-login popup-input form-input input" placeholder="Введите...">
                         <label class="input-label">Пароль</label>
-                        <input type="text" class="input-password popup-input form-input input" placeholder="Введите...">
-                        <button class="popup-btn main-btn">Авторизоваться</button>
+                        <input name="password" type="text" class="input-password popup-input form-input input" placeholder="Введите...">
+                        <button type="submit" class="popup-btn main-btn">Авторизоваться</button>
                     </form>
                 </div>
             </div>
@@ -136,20 +145,29 @@
             <div class="popup" id="popup-reg-wp">
                 <div class="popup-wrapper">
                     <h2 class="popup-title">Регистрация</h2>
-                    <form class="popup-form">
+                    <form method="post" asp-page="/Authorization" asp-page-handler="Registration" class="popup-form">
+@*                         <input type="text" class="input-password popup-input form-input input" placeholder="Введите...">
+                         *@
                         <label class="input-label">Логин</label>
-                        <input type="text" class="input-login popup-input form-input input" placeholder="Введите...">
+                        <input name ="login" type="text" class="input-login popup-input form-input input" placeholder="Введите...">
                         <label class="input-label">Пароль</label>
-                        <input type="text" class="input-password popup-input form-input input" placeholder="Введите...">
+                        <input name="password" type="text" class="input-login popup-input form-input input" placeholder="Введите...">
+
+                        <label class="input-label">Фамилия</label>
+                        <input name="surname" type="text" class="input-login popup-input form-input input" placeholder="Введите...">
+                        <label class="input-label">Имя</label>
+                        <input name="name" type="text" class="input-login popup-input form-input input" placeholder="Введите...">
+                        <label class="input-label">Отчество</label>
+                        <input name="patronymic" type="text" class="input-login popup-input form-input input" placeholder="Введите...">
                         <label class="input-label">Роль</label>
                         <div class="popup-radio">
                             <label class="popup-radio--item">
-                                <input type="radio" name="radio" checked>
+                                <input name="rb" value="doctor" type="radio" name="radio" checked>
                                 <span class="popup-radio--name">Доктор</span>
                             </label>
 
                             <label class="popup-radio--item">
-                                <input type="radio" name="radio">
+                                <input name="rb" value="medicalworker" type="radio" name="radio">
                                 <span class="popup-radio--name">Мед.Регистратор</span>
                             </label>
                         </div>

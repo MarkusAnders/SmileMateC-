@@ -9,30 +9,33 @@
         <div class="container">
             <div class="create-wrapper form-wrapper">
                 <div class="create-form form">
-                    <form action="" class="">
+                <form method="post" asp-page="/Authorization" asp-page-handler="CreatePatient" class="">
                         <p class="form-label form-hint">Обязательные поля указаны - * </p>
                         <div class="form-inputs">
                             <div class="inputs-left">
                                 <label class="input-label">Фамилия *</label>
-                                <input type="text" class="input-surname form-input input" placeholder="Введите данные...">
+                                <input name="surname" type="text" class="input-surname form-input input" placeholder="Введите данные...">
                                 <label class="input-label">Имя *</label>
-                                <input type="text" class="input-name form-input input" placeholder="Введите данные...">
+                                <input name="name" type="text" class="input-name form-input input" placeholder="Введите данные...">
                                 <label class="input-label">Отчество *</label>
-                                <input type="text" class="input-patronymic form-input input" placeholder="Введите данные...">
+                                <input name="patronymic" type="text" class="input-patronymic form-input input" placeholder="Введите данные...">
                             </div>
                             <div class="inputs-rigth">
                                 <label class="input-label">Номер телефона *</label>
-                                <input type="text" class="input-number form-input input" placeholder="Введите данные...">
+                                <input name="phonenumber" type="text" class="input-number form-input input" placeholder="Введите данные...">
                                 <label class="input-label">Электронная почта * </label>
-                                <input type="text" class="input-emial form-input input" placeholder="Введите данные...">
-                                <label class="input-label">Дата рождения * </label>
-                                <input type="date" class="input-date form-input input" placeholder="Введите данные...">
+                                <input name="username" type="text" class="input-emial form-input input" placeholder="Введите данные...">
+                                <label class="input-label">Пароль *</label>
+                                <input name="password" type="text" class="input-emial form-input input" placeholder="Введите  пароль...">
+
+                                <label class="input-label">Дата рождения</label>
+                                <input name="date" type="date" class="input-date form-input input" placeholder="Введите данные...">
                             </div>
                         </div>
-                        <label class="input-label">Адрес *</label>
-                            <input type="text" class="input-address form-input input" placeholder="Введите данные...">
+                        <label class="input-label">Адрес</label>
+                            <input name="adress" type="text" class="input-address form-input input" placeholder="Введите данные...">
                         <div class="form-btn">
-                            <a href="" class="btn-reg main-btn">Зарегистрировать</a>
+                            <button type="submit" class="btn-reg main-btn">Зарегистрировать</button>
                         </div>
                     </form>
                 </div>

@@ -4,4 +4,9 @@
     ViewData["Title"] = "SmileMate - Главная страница";
 }
 
+ @foreach(var user in Model.Users)
+{
+    <label>@user.UserName @user.GetType()</label>
+}
 
+ 

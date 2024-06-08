@@ -7,7 +7,7 @@ namespace SmileMate.Common
     {
         public static async Task FillDataBase(UserManager<User> _userManager, RoleManager<Role> _roleManager)
         {
-            var admin = await _userManager.FindByNameAsync("FirstAdmin");
+            var admin = await _userManager.FindByNameAsync("Administrator");
 
             if (admin == null)
             {

@@ -1,20 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using SmileMate.Common;
+using SmileMate.Common.Entities;
 
 namespace SmileMate.Pages
 {
     public class PatientModel : PageModel
     {
-        private readonly ILogger<PatientModel> _logger;
+        private readonly SmileMateContext _context;
 
-        public PatientModel(ILogger<PatientModel> logger)
+        public PatientModel(SmileMateContext context)
         {
-            _logger = logger;
+            _context = context; 
         }
 
-        public void OnGet()
-        {
+        public List<Patient> Patients { get; set; }
 
+        public async Task<IActionResult> OnGetAsync(string searchTerm)
+        {
+            IQueryable<Patient> query = _context.Set<Patient>();
+
+            if (!String.IsNullOrEmpty(searchTerm))
+            {
+                searchTerm = searchTerm.ToLower();
+
+                query = query.Where(p => p.Name.ToLower().Contains(searchTerm)
+                    || p.Surname.ToLower().Contains(searchTerm)
+                    || p.Patronymic.ToLower().Contains(searchTerm)
+                    || p.UserName.ToLower().Contains(searchTerm)
+                    || p.PhoneNumber.Contains(searchTerm));
+            }
+
+            Patients = await query.ToListAsync();
+
+            return Page();
         }
     }
 }

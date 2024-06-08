@@ -1,20 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using SmileMate.Common;
+using SmileMate.Common.Entities;
 
 namespace SmileMate.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly SmileMateContext _context;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(SmileMateContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public void OnGet()
-        {
+        public List<User> Users { get; set; }
 
+        public async Task<IActionResult> OnGet()
+        {
+            Users = await _context.Set<User>().ToListAsync();
+
+            return Page();
         }
     }
 }

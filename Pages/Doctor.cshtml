@@ -9,10 +9,10 @@
             <div class="doctor-wrapper">
                 <h1 class="doctor-title main-title">Врачи</h1>
                 <div class="client-instrument instrument">
-                    <form action="#" class="doctor-search search">
+                    <form method="get" class="doctor-search search">
                     <div class="search-wrapper">
-                        <input type="text" class="doctor-search--input search-input" placeholder="Поиск...">
-                        <button class="instrument-search--btn">
+                        <input name="searchTerm" type="text" class="doctor-search--input search-input" placeholder="Поиск...">
+                        <button type="submit" class="instrument-search--btn">
                             <img class="instrument-search--icon" src="/img/icon/search.svg">
                         </button>
                         </div>
@@ -34,18 +34,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach(var doctor in Model.Doctors)
+                            {
                             <tr>
-                                <td>Андронов</td>
-                                <td>Илья</td>
-                                <td>Андреевич</td>
-                                <td>andronov-ilya@smilemate.ru</td>
+                                <td>@doctor.Surname</td>
+                                <td>@doctor.Name</td>
+                                <td>@doctor.Patronymic</td>
+                                <td>@doctor.UserName</td>
                                 <td>
-                                    <a asp-page="/DoctorEdit" class="table-btn table-btn--info second-btn">Редактировать</a>
+                                    <a href="/DoctorEdit?doctorid=@doctor.Id" class="table-btn table-btn--info second-btn">Редактировать</a>
                                 </td>
                                 <td>
-                                    <a class="table-btn table-btn--info second-btn">Удалить</a>
+                                    <form method="post">
+                                        <input type="hidden" name="doctorid" value="@doctor.Id"/>
+                                        <button class="table-btn table-btn--info second-btn">Удалить</button>
+                                    </form>
                                 </td>
                             </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

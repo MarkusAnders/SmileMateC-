@@ -10,9 +10,9 @@
             <div class="client-wrapper">
                 <h1 class="client-title main-title">Клиенты</h1>
                 <div class="client-instrument instrument">
-                    <form action="#" class="instrument-search search">
+                    <form method="get" class="instrument-search search">
                         <div class="search-wrapper">
-                            <input type="text" class="instrument-search--input search-input" placeholder="Поиск...">
+                            <input name="searchTerm" type="text" class="instrument-search--input search-input" placeholder="Поиск...">
                             <button class="instrument-search--btn">
                                 <img class="instrument-search--icon" src="/img/icon/search.svg">
                             </button>
@@ -36,22 +36,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Тихонов</td>
-                                <td>Сергей</td>
-                                <td>Денисович</td>
-                                <td>22</td>
-                                <td>89535507494</td>
-                                <td>
-                                    <a asp-page="/ReceptionCreate" class="table-btn table-btn--reg second-btn">Записать</a>
-                                </td>
-                                <td>
-                                    <a asp-page="/PatientDetails" class="table-btn table-btn--info second-btn">Подробности</a>
-                                </td>
-                                <td>
-                                    <a asp-page="/MedicalHistory" class="table-btn table-btn--history second-btn">История посещения</a>
-                                </td>
-                            </tr>
+                            @foreach (var patient in Model.Patients)
+                            {
+                                <tr>
+                                    <td>@patient.Surname</td>
+                                    <td>@patient.Name</td>
+                                    <td>@patient.Patronymic</td>
+                                    <td>
+                                    @{
+                                        var age = DateTime.Now.Year - patient.BirthdayDate.Year;
+                                        <text>@age</text>
+                                    }
+                                    </td>
+                                    <td>@patient.PhoneNumber</td>
+                                    <td>
+                                        <a asp-page="/ReceptionCreate" class="table-btn table-btn--reg second-btn">Записать</a>
+                                    </td>
+                                    <td>
+                                        <a asp-page="/PatientDetails" class="table-btn table-btn--info second-btn">Подробности</a>
+                                    </td>
+                                    <td>
+                                        <a asp-page="/MedicalHistory" class="table-btn table-btn--history second-btn">История посещения</a>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

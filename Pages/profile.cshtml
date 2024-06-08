@@ -10,16 +10,19 @@
             <h2 class="profile-title">Профиль</h2>
             <div class="profile-content">
                 <div class="profile-left">
-                <form class="profile-form">
+                <form method="post"class="profile-form">
                     <label class="input-label">Логин</label>
-                    <input type="text" readonly class="input-login profile-input form-input input" placeholder="sep.play02@mail.ru">
+                    <input type="text" readonly class="input-login profile-input form-input input" placeholder="@Model.CurrentUser.UserName">
                     <label class="input-label">Пароль</label>
-                    <input type="password" readonly class="input-password profile-input form-input input" placeholder="Пароль">
+                    <input name="newpassword" type="password" class="input-password profile-input form-input input" placeholder="Пароль">
                     <div class="profile-btn-wrapper">
-                        <a class="profile-btn profile-btn--left second-btn">Изменить пароль</a>
-                        <a class="profile-btn profile-btn--left second-btn">Выйти</a>
+                        <button type="submit" class="profile-btn profile-btn--left second-btn">Изменить пароль</button>
                     </div>
                 </form>
+                <form method="post" asp-page="/Authorization" asp-page-handler="Logout">
+                    <button type="submit" class="profile-btn profile-btn--left second-btn">Выйти</button>
+                </form>
+                    
                 </div>
                 <div class="profile-rigth">
                     <a asp-page="/MedicalHistory" class="profile-btn main-btn">История посещений</a>
