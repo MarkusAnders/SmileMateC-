@@ -19,13 +19,15 @@
                         <button type="submit" class="profile-btn profile-btn--left second-btn">Изменить пароль</button>
                     </div>
                 </form>
-                <form method="post" asp-page="/Authorization" asp-page-handler="Logout">
-                    <button type="submit" class="profile-btn profile-btn--left second-btn">Выйти</button>
-                </form>
-                    
                 </div>
                 <div class="profile-rigth">
-                    <a asp-page="/MedicalHistory" class="profile-btn main-btn">История посещений</a>
+                    @* @if(User.Identity.IsAuthenticated && User.IsInRole("Client")){
+                        <a asp-page="/MedicalHistory" class="profile-btn profile-history--btn main-btn">История посещений</a>
+                    } *@
+
+                    <form method="post" asp-page="/Authorization" asp-page-handler="Logout">
+                        <button type="submit" class="profile-btn profile-btn--exit second-btn">Выйти</button>
+                    </form>
                 </div>
             </div>
         </div>

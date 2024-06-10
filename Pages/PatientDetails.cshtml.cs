@@ -1,20 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using SmileMate.Common;
+using SmileMate.Common.Entities;
+
 
 namespace SmileMate.Pages
 {
     public class PatientDetails: PageModel
     {
-        private readonly ILogger<PatientDetails> _logger;
+        private readonly SmileMateContext _context;
 
-        public PatientDetails(ILogger<PatientDetails> logger)
+        public PatientDetails(SmileMateContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public void OnGet()
-        {
+        public Patient Patient { get; set; }
 
+        public async Task<IActionResult> OnGetAsync(long id)
+        {
+            Patient = await _context.Patients.FindAsync(id);
+
+            if (Patient == null)
+            {
+                return NotFound();
+            }
+
+            return Page();
         }
     }
 }

@@ -53,7 +53,7 @@
                                         <a asp-page="/ReceptionCreate" class="table-btn table-btn--reg second-btn">Записать</a>
                                     </td>
                                     <td>
-                                        <a asp-page="/PatientDetails" class="table-btn table-btn--info second-btn">Подробности</a>
+                                        <a href="/PatientDetails?id=@patient.Id" class="table-btn table-btn--info second-btn">Подробности</a>
                                     </td>
                                     <td>
                                         <a asp-page="/MedicalHistory" class="table-btn table-btn--history second-btn">История посещения</a>

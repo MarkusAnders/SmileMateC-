@@ -43,3 +43,9 @@ function handleFiles(files) {
         }
     });
 }
+
+function text(x){
+    if(x==0)document.getElementById("inputBlock").style.display = "block";
+    else document.getElementById("inputBlock").style.display = "none";
+    return;
+}

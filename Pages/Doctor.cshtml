@@ -17,8 +17,6 @@
                         </button>
                         </div>
                     </form>
-                    <div class="instrument-border"></div>
-                    <a asp-page="/DoctorCreate" class="instrument-btn main-btn">Зарегистрировать</a>
                 </div>
                 
                 <div class="doctor-table table">
@@ -47,7 +45,7 @@
                                 <td>
                                     <form method="post">
                                         <input type="hidden" name="doctorid" value="@doctor.Id"/>
-                                        <button class="table-btn table-btn--info second-btn">Удалить</button>
+                                        <button class="table-btn table-btn--delete second-btn">Удалить</button>
                                     </form>
                                 </td>
                             </tr>
