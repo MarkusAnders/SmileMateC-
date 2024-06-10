@@ -9,10 +9,10 @@
         <div class="container">
             <div class="reception-wrapper">
                 <h1 class="reception-title main-title">Приемы</h1>
-                <form action="#" class="reception-search search">
+                <form method="get" class="reception-search search">
                     <div class="search-wrapper">
-                        <input type="text" class="reception-search--input search-input" placeholder="Поиск...">
-                        <button class="instrument-search--btn">
+                    <input name="searchTerm" type="text" class="instrument-search--input search-input" placeholder="Поиск...">
+                    <button class="instrument-search--btn">
                             <img class="instrument-search--icon" src="/img/icon/search.svg">
                         </button>
                     </div>
@@ -28,46 +28,31 @@
                                 <th></th>
                                 <th>Действие</th>
                                 <th></th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Тихонов Сергей Денисович</td>
-                                <td>Андронов Илья Андреевич</td>
-                                <td>07.06</td>
-                                <td>8:30</td>
-                                <td>
-                                    <a asp-page="/ReceptionEdit" class="table-btn table-btn--info second-btn">Изменить</a>
-                                </td>
-                                <td>
-                                    <a asp-page="/MedicalDiseaseCreate" class="table-btn table-btn--history second-btn">Создать посещение</a>
-                                </td>
-                                <td>
-                                    <a class="table-btn table-btn--close second-btn">Закрыть</a>
-                                </td>
-                                <td>
-                                    <a class="table-btn table-btn--delete second-btn">Удалить</a>
-                                </td>
-                            </tr>
-                            <tr class="passed">
-                                <td>Тихонов Сергей Денисович</td>
-                                <td>Андронов Илья Андреевич</td>
-                                <td>07.06</td>
-                                <td>8:30</td>
-                                <td>
-                                    <a asp-page="/ReceptionEdit" class="table-btn table-btn--info second-btn">Изменить</a>
-                                </td>
-                                <td>
-                                    <a asp-page="/MedicalDiseaseCreate" class="table-btn table-btn--history second-btn">Создать посещение</a>
-                                </td>
-                                <td>
-                                    <a class="table-btn table-btn--close second-btn">Закрыть</a>
-                                </td>
-                                <td>
-                                    <a class="table-btn table-btn--delete second-btn">Удалить</a>
-                                </td>
-                            </tr>
+                            @foreach(var reception in Model.Receptions)
+                            {
+                                <tr>
+                                    <td>@reception.Client.Surname @reception.Client.Name @reception.Client.Patronymic</td>
+                                    <td>@reception.Doctor.Surname @reception.Doctor.Surname @reception.Doctor.Surname</td>
+                                    <td>@reception.Date</td>
+                                    <td>@reception.Time</td>
+                                    <td>
+                                        <a href="/MedicalDiseaseCreate?receptionid=@reception.Id" class="table-btn table-btn--history second-btn">Создать посещение</a>
+                                    </td>
+                                    <td>
+                                        <a class="table-btn table-btn--close second-btn">Закрыть</a>
+                                    </td>
+                                    <td>
+                                        <form method="post">
+                                            <input type="hidden" name="receptionid" value="@reception.Id"/>
+                                            <button type="submit" class="table-btn table-btn--delete second-btn">Удалить</button>
+                                        </form>
+                                        
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

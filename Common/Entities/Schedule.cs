@@ -8,7 +8,6 @@
         public TimeOnly Time { get; set; }
 
         public long DoctorId { get; set; }
-        
         public Doctor Doctor { get; set; }
     }
 }

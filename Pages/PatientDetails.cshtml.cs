@@ -29,5 +29,24 @@ namespace SmileMate.Pages
 
             return Page();
         }
+
+        public async Task<IActionResult> OnPostAsync(int? patientid)
+        {
+            var patientToDelete = await _context.Set<Patient>().FirstOrDefaultAsync(p => p.Id == patientid);
+
+            var receptionsToDelete = await _context.Set<Reception>()
+                .Include(r => r.Client)
+                .Include(r => r.Doctor)
+                .Where(r => r.Client.Id == patientToDelete.Id)
+                .ToListAsync();
+
+            _context.RemoveRange(receptionsToDelete);
+             
+            _context.Remove(patientToDelete);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("/Patient");
+        }
     }
 }

@@ -8,59 +8,42 @@
     <div class="container">
         <h2 class="disease-create main-title">Создание истории посещения</h2>
         <div class="disease-create--wrapper disease-form">
-            <h3 class="disease-form--patient">Тихонов Сергей Денисович</h3>
-            <form class="disease-form--content">
+            <h3 class="disease-form--patient">@Model.Reception.Client.Surname @Model.Reception.Client.Name @Model.Reception.Client.Patronymic</h3>
+            <form class="disease-form--content" method="post" enctype="multipart/form-data">
                 <div class="disease-form--top">
                     <div class="disease-form--left">
-                    <label class="input-label">Дата посещения</label>
-                    <input type="date" class="input-date form-input input" placeholder="Укажите дату">
-                    <label class="input-label">Врач</label>
-                    <div class="select">
-                        <select class="input-doctor" name="format" id="format">
-                            <option selected disabled>Укажите врача</option>
-                            <option value="">Андронов Илья Андреевич</option>
-                            <option value="">Бличенков Антон Игоревич</option>
-                        </select>
-                    </div>
+                        <label class="input-label">Диагноз</label>
+                        <input name="diagnosis" type="text" class="input-disease form-input input" placeholder="Укажите диагноз">
                     </div>
                     <div class="disease-form--rigth">
-                        <label class="input-label">Диагноз</label>
-                        <input type="text" class="input-disease form-input input" placeholder="Укажите диагноз">
                         <label class="input-label">Стоимость лечения</label>
-                        <input type="text" class="input-price form-input input" placeholder="Укажите цену">
+                        <input name="price" type="text" class="input-price form-input input" placeholder="Укажите цену" />
                     </div>
                 </div>
                 <label class="input-label">Комментарий врача</label>
-                <textarea type="text" class="input-comment form-input input" placeholder="Введите.."></textarea>
-                @* <label class="input-label">Снимки</label>
-                <input type="file" id="image" multiple name="image" accept="image/png, image/jpeg" /> *@
-                
+                <textarea name="comment" type="text" class="input-comment form-input input" placeholder="Введите.."></textarea>
+
                 <div class="upload-container">
                     <div class="upload-zone_dragover" id="dropZone">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="1" viewBox="0 0 24 24" class="upload-loader__image">
-                            <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M12 12v9"/>
-                            <path d="m16 16-4-4-4 4"/>
+                            <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M12 12v9" />
+                            <path d="m16 16-4-4-4 4" />
                         </svg>
                         <p>Перетащите файл(ы) или нажмите на кнопку</p>
-                        
                     </div>
                     <div class="upload-btn">
-                        <label for="fileInput" class="browse-files-btn">Загрузить   </label>
-                        <input type="file" id="fileInput" class="form-upload__input" multiple accept="image/*">
-                        <button id="clearFilesButton" class="browse-files-btn">Очистить</button>
+                        <label for="fileInput" class="browse-files-btn">Загрузить</label>
+                        <input type="file" id="fileInput" class="form-upload__input" multiple accept="image/*" name="photos" >
+                        <button id="clearFilesButton" class="browse-files-btn" type="button">Очистить</button>
                     </div>
                     <div id="previewContainer" class="preview-container"></div>
                 </div>
 
                 <div class="disease-btns">
-                    <a class="disease-btn main-btn">Создать</a>
-                    <a class="disease-btn disease-btn--back second-btn">Назад</a>
+                    <button type="submit" class="disease-btn main-btn">Создать</button>
+                    <a asp-page="/Reception" class="disease-btn disease-btn--back second-btn">Назад</a>
                 </div>
             </form>
         </div>
     </div>
 </section>
-
-
-    
-

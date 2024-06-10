@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SmileMate.Common;
@@ -12,9 +13,11 @@ using SmileMate.Common;
 namespace SmileMate.Migrations
 {
     [DbContext(typeof(SmileMateContext))]
-    partial class SmileMateContextModelSnapshot : ModelSnapshot
+    [Migration("20240610161833_MedHistoryPhotoCollection")]
+    partial class MedHistoryPhotoCollection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
