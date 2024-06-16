@@ -26,7 +26,7 @@
                                 <th>Фамилия</th>
                                 <th>Имя</th>
                                 <th>Отчество</th>
-                                <th>Почта</th>
+                                @* <th>Логин</th> *@
                                 <th>Действие</th>
                                 <th></th>
                             </tr>
@@ -38,7 +38,8 @@
                                 <td>@doctor.Surname</td>
                                 <td>@doctor.Name</td>
                                 <td>@doctor.Patronymic</td>
-                                <td>@doctor.UserName</td>
+                                @* <td>@doctor.UserName</td> *@
+                                
                                 <td>
                                     <a href="/DoctorEdit?doctorid=@doctor.Id" class="table-btn table-btn--info second-btn">Редактировать</a>
                                 </td>

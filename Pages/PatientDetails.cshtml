@@ -18,13 +18,17 @@
                             <p class="detail-form-date form-label">Почта: <span>@Model.Patient.UserName</span></p>
                             <p class="detail-form-date form-label">Адрес: <span>@Model.Patient.Address</span></p>
                         </div>
-                        <div class="detail-form--btn form-btn">
-                            <a href="/PatientEdit?patientid=@Model.Patient.Id" class="form-btn--edit main-btn">Редактировать</a>
-                            <form method="post">
-                                <input type="hidden" name="patientid" value="@Model.Patient.Id"/>
-                                <button class="form-btn--delete second-btn">Удалить</button>
-                            </form>
-                        </div>
+                        @if (User.Identity.IsAuthenticated && !User.IsInRole("Doctor"))
+                        {
+                            <div class="detail-form--btn form-btn">
+                                <a href="/PatientEdit?patientid=@Model.Patient.Id" class="form-btn--edit main-btn">Редактировать</a>
+                                <form method="post">
+                                    <input type="hidden" name="patientid" value="@Model.Patient.Id" />
+                                    <button class="form-btn--delete second-btn">Удалить</button>
+                                </form>
+                            </div>
+                        }
+                       
                     }
                 </div>
                 <div class="client-detail-back-btn">

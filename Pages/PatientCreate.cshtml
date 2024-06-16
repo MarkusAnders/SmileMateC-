@@ -9,39 +9,39 @@
         <div class="container">
             <div class="create-wrapper form-wrapper">
                 <div class="create-form form">
-                <form method="post" asp-page="/Authorization" asp-page-handler="CreatePatient" class="">
-                        <p class="form-label form-hint">Обязательные поля указаны - * </p>
+                    <form method="post" asp-page="/Authorization" asp-page-handler="CreatePatient" class="">
                         <div class="form-inputs">
                             <div class="inputs-left">
-                                <label class="input-label">Фамилия *</label>
-                                <input name="surname" type="text" class="input-surname form-input input" placeholder="Введите данные...">
-                                <label class="input-label">Имя *</label>
-                                <input name="name" type="text" class="input-name form-input input" placeholder="Введите данные...">
-                                <label class="input-label">Отчество *</label>
-                                <input name="patronymic" type="text" class="input-patronymic form-input input" placeholder="Введите данные...">
+                                <label class="input-label">Фамилия</label>
+                                <input required name="surname" type="text" class="input-surname form-input input" placeholder="Введите данные...">
+                                <label class="input-label">Имя</label>
+                                <input required name="name" type="text" class="input-name form-input input" placeholder="Введите данные...">
+                                <label class="input-label">Отчество</label>
+                                <input required name="patronymic" type="text" class="input-patronymic form-input input" placeholder="Введите данные...">
                             </div>
                             <div class="inputs-rigth">
-                                <label class="input-label">Номер телефона *</label>
-                                <input name="phonenumber" type="text" class="input-number form-input input" placeholder="Введите данные...">
+                                <label class="input-label">Номер телефона</label>
+                                <input autocomplete="off" required name="phonenumber" type="text" class="input-number form-input input" id="phone" placeholder="+7(___) ___-__-__">
                                 <label class="input-label">Дата рождения</label>
-                                <input name="date" type="date" class="input-date form-input input" placeholder="Введите данные...">
-                                <label class="input-label">Адрес</label>
-                                <input name="adress" type="text" class="input-address form-input input" placeholder="Введите данные...">
+                                <input required name="date" type="date" class="input-date form-input input" id="birthdate" placeholder="Введите данные...">
+                                <label autocomplete="off"class="input-label">Адрес</label>
+                                <input required name="adress" type="text" class="input-address form-input input" placeholder="Введите данные...">
                             </div>
                         </div>
                         <p class="form-label form-account">Данные для авторизации клиента</p>
                         <div class="inputs-bottom">
-                            <div class="input-bottom--item">
-                                <label class="input-label">Электронная почта * </label>
-                                <input name="username" type="text" class="input-email patient-email form-input input" placeholder="Введите данные...">
+                            <div class="input-bottom--item input-bottom--email">
+                                <label required class="input-label">Электронная почта</label>
+                                <input id="email" oninput="validateEmail()" name="username" type="text" class="input-email patient-email form-input input" placeholder="Введите данные...">
+                                <span id="error-message" class="error"></span>
                             </div>
                             <div class="input-bottom--item">
-                                <label class="input-label">Пароль *</label>
-                                <input name="password" type="text" class="input-password patient-password form-input input" placeholder="Введите  пароль...">
+                                <label class="input-label">Пароль</label>
+                                <input required name="password" type="text" class="input-password patient-password form-input input" placeholder="Введите  пароль...">
                             </div>
                         </div>
                         <div class="form-btn">
-                            <button type="submit" class="btn-reg main-btn">Зарегистрировать</button>
+                            <button type="submit" id="submit-button" class="btn-reg patient-create--btn main-btn">Зарегистрировать</button>
                         </div>
                     </form>
                 </div>

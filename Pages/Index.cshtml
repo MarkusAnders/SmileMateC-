@@ -4,9 +4,11 @@
     ViewData["Title"] = "SmileMate - Главная страница";
 }
 
- @foreach(var user in Model.Users)
-{
-    <label>@user.UserName @user.GetType()</label>
-}
 
- 
+
+<section class="index">
+    <h1 class="index-title main-title">Добро пожаловать!</h1>
+    @if(!User.Identity.IsAuthenticated){
+        <p class="index-subtitle second-title">Необходимо авторизоваться.</p>
+    }
+</section>

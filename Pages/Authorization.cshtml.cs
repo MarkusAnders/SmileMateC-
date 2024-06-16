@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SmileMate.Common;
 using SmileMate.Common.Entities;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace SmileMate.Pages
 {
@@ -30,46 +32,111 @@ namespace SmileMate.Pages
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(login, password, isPersistent: false, lockoutOnFailure: false);
+                var user = await _userManager.FindByNameAsync(login);
+                if (user == null)
+                {
+                    return new JsonResult(new { success = false, message = "Пользователь не найден" });
+                }
+
+                var result = await _signInManager.PasswordSignInAsync(user.UserName, password, isPersistent: false, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
-                    var user = await _userManager.FindByNameAsync(login);
-                    if (user != null)
-                    {
-                        var roles = await _userManager.GetRolesAsync(user);
-
-                        if (roles.Contains("Admin"))
-                        {
-                            return RedirectToPage("/Index");
-                        }
-                        /*                        else if (roles.Contains("Teacher"))
-                                                {
-                                                    return RedirectToPage("/MyCourses");
-                                                }
-                                                else if (roles.Contains("Student"))
-                                                {
-                                                    return RedirectToPage("/Index", new { FilterType = "InProgress" });
-                                                }*/
-                        else
-                        {
-                            return RedirectToPage("/Index");
-                        }
-                    }
+                    var roles = await _userManager.GetRolesAsync(user);
+                    return new JsonResult(new { success = true, redirectUrl = roles.Contains("Admin") ? Url.Page("/Index") : Url.Page("/Index") });
                 }
                 else if (result.IsLockedOut)
                 {
-                    ModelState.AddModelError(string.Empty, "User account locked out.");
+                    return new JsonResult(new { success = false, message = "Аккаунт заблокирован" });
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return new JsonResult(new { success = false, message = "Неверный логин или пароль" });
                 }
             }
 
-            var errorList = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-            return NotFound($"Список ошибок: {string.Join(", ", errorList)}");
+            return new JsonResult(new { success = false, message = "Неверные данные ввода" });
         }
+
+
+
+        //public async Task<IActionResult> OnPostLoginAsync(string login, string password)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = await _userManager.FindByNameAsync(login);
+        //        if (user != null)
+        //        {
+        //            var result = await _signInManager.PasswordSignInAsync(user.UserName, password, isPersistent: false, lockoutOnFailure: false);
+
+        //            if (result.Succeeded)
+        //            {
+        //                var roles = await _userManager.GetRolesAsync(user);
+        //                if (roles.Contains("Admin"))
+        //                {
+        //                    return RedirectToPage("/Index");
+        //                }
+        //                else
+        //                {
+        //                    return RedirectToPage("/Index");
+        //                }
+        //            }
+        //            else if (result.IsLockedOut)
+        //            {
+        //                ModelState.AddModelError(string.Empty, "User account locked out.");
+        //            }
+        //            else
+        //            {
+        //                ModelState.AddModelError(string.Empty, "Неверный логин или пароль");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError(string.Empty, "Неверный логин или пароль");
+        //        }
+        //    }
+
+        //    return Page();
+        //}
+
+
+        //public async Task<IActionResult> OnPostLoginAsync(string login, string password)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var result = await _signInManager.PasswordSignInAsync(login, password, isPersistent: false, lockoutOnFailure: false);
+
+        //        if (result.Succeeded)
+        //        {
+        //            var user = await _userManager.FindByNameAsync(login);
+        //            if (user != null)
+        //            {
+        //                var roles = await _userManager.GetRolesAsync(user);
+
+        //                if (roles.Contains("Admin"))
+        //                {
+        //                    return RedirectToPage("/Index");
+        //                }
+        //                else
+        //                {
+        //                    return RedirectToPage("/Index");
+        //                }
+        //            }
+        //        }
+        //        else if (result.IsLockedOut)
+        //        {
+        //            ModelState.AddModelError(string.Empty, "User account locked out.");
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+        //        }
+        //    }
+
+        //    var errorList = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+        //    return NotFound($"Список ошибок: {string.Join(", ", errorList)}");
+        //}
+
 
         public async Task<IActionResult> OnPostRegistrationAsync(string login, string password, string rb, string surname, string name, string patronymic)
         {
@@ -88,7 +155,7 @@ namespace SmileMate.Pages
 
                     await _userManager.AddToRoleAsync(doctor, "Doctor");
 
-                    return RedirectToPage("/Index");
+                    return RedirectToPage("/Doctor");
                 }
             }
 
@@ -106,25 +173,9 @@ namespace SmileMate.Pages
 
                     await _userManager.AddToRoleAsync(medicalworker, "MedicalWorker");
 
-                    return RedirectToPage("/Index");
+                    return RedirectToPage("/Patient");
                 }
             }
-            /*            else
-                        {
-                            if (result.Succeeded)
-                            {
-                                if (!await _roleManager.RoleExistsAsync("Teacher"))
-                                {
-                                    await _roleManager.CreateAsync(new Role { Name = "Teacher" });
-                                }
-
-                                await _userManager.AddToRoleAsync(user, "Teacher");
-                                await _signInManager.SignInAsync(user, isPersistent: false);
-                                return RedirectToPage("/ProfilePage");
-                            }
-                        }*/
-
-
             var errorList = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
             return NotFound($"Список ошибок: {string.Join(", ", errorList)}");
         }
@@ -144,6 +195,9 @@ namespace SmileMate.Pages
 
                 await _userManager.AddToRoleAsync(patient, "Patient");
 
+                // Отправка электронного письма клиенту
+                await SendEmailAsync(username, password);
+
                 return RedirectToPage("/Patient");
             }
 
@@ -152,10 +206,45 @@ namespace SmileMate.Pages
         }
 
         public async Task<IActionResult> OnPostLogoutAsync()
-        {
+        { 
             await _signInManager.SignOutAsync();
 
             return RedirectToPage("/Index");
+        }
+
+        private readonly string _smtpServer = "smtp.gmail.com";
+        private readonly int _smtpPort = 465;
+        private readonly string _smtpUser = "serezha.tikhonov.2013@gmail.com";
+        private readonly string _smtpPass = "onoewopmywkbkklk";
+        private async Task SendEmailAsync(string username, string password)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("SmileMate", _smtpUser));
+            message.To.Add(new MailboxAddress(username, username));
+            message.Subject = $"Вы зарегистрированы в стоматологической клинике";
+
+            var builder = new BodyBuilder
+            {
+                HtmlBody = GenerateEmailBody(username, password)
+            };
+
+            message.Body = builder.ToMessageBody();
+
+            using (var client = new SmtpClient())
+            {
+                await client.ConnectAsync(_smtpServer, _smtpPort, true);
+                await client.AuthenticateAsync(_smtpUser, _smtpPass);
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
+            }
+        }
+
+        private string GenerateEmailBody(string username, string password)
+        {
+            var body = $"<h1>Ваш логин: {username}</h1>" +
+                       $"<p>Ваш пароль: {password}</p>";
+
+            return body;
         }
     }
 }

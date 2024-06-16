@@ -6,11 +6,11 @@ using SmileMate.Common.Entities;
 
 namespace SmileMate.Pages
 {
-    public class ReceptionModel : PageModel
+    public class ReceptionCompleted : PageModel
     {
         private readonly SmileMateContext _context;
 
-        public ReceptionModel(SmileMateContext context)
+        public ReceptionCompleted(SmileMateContext context)
         {
             _context = context;
         }
@@ -25,7 +25,7 @@ namespace SmileMate.Pages
 
             IQueryable<Reception> query = _context.Set<Reception>()
                 .Include(r => r.Client).Include(r => r.Doctor)
-                .Where(r => new DateTime(r.Date.Year, r.Date.Month, r.Date.Day, r.Time.Hour, r.Time.Minute, r.Time.Second) >= oneHourAgo);
+                .Where(r => new DateTime(r.Date.Year, r.Date.Month, r.Date.Day, r.Time.Hour, r.Time.Minute, r.Time.Second) < oneHourAgo);
 
             if (!String.IsNullOrEmpty(searchTerm))
             {
@@ -39,10 +39,10 @@ namespace SmileMate.Pages
                     || r.Client.Patronymic.ToLower().Contains(searchTerm));
             }
 
-            // Добавляем сортировку по дате и времени
+            // Добавляем сортировку по дате и времени в порядке убывания
             Receptions = await query
-                .OrderBy(r => r.Date)
-                .ThenBy(r => r.Time)
+                .OrderByDescending(r => r.Date)
+                .ThenByDescending(r => r.Time)
                 .ToListAsync();
 
             return Page();
@@ -85,7 +85,7 @@ namespace SmileMate.Pages
                 }
             }
 
-            return RedirectToPage("/Reception"); // Перенаправляем пользователя на страницу со списком
+            return RedirectToPage("/ReceptionCompleted"); // Перенаправляем пользователя на страницу со списком
         }
     }
 }

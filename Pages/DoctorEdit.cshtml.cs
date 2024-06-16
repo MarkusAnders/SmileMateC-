@@ -53,7 +53,7 @@ namespace SmileMate.Pages
 
             var result = await _userManager.UpdateAsync(doctor);
 
-            return RedirectToPage("/DoctorEdit", new { doctorid = doctorid });
+            return RedirectToPage("/Doctor", new { doctorid = doctorid });
         }
     }
 }

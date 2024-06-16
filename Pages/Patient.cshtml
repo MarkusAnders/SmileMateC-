@@ -12,14 +12,17 @@
                 <div class="client-instrument instrument">
                     <form method="get" class="instrument-search search">
                         <div class="search-wrapper">
-                            <input name="searchTerm" type="text" class="instrument-search--input search-input" placeholder="Поиск...">
+                            <input name="searchTerm" type="text" class="instrument-search--input client-search--input search-input" placeholder="Поиск...">
                             <button class="instrument-search--btn">
                                 <img class="instrument-search--icon" src="/img/icon/search.svg">
                             </button>
                         </div>
                     </form>
-                    <div class="instrument-border"></div>
-                    <a asp-page="/PatientCreate" class="instrument-btn main-btn">Зарегистрировать</a>
+                    @if (User.Identity.IsAuthenticated && !User.IsInRole("Doctor"))
+                    {
+                        <div class="instrument-border"></div>
+                        <a asp-page="/PatientCreate" class="instrument-btn main-btn">Зарегистрировать</a>
+                    }
                 </div>
                 <div class="client-table table">
                     <table class="client-table--wrapper table-wrapper">
@@ -30,8 +33,11 @@
                                 <th>Отчество</th>
                                 <th>Возраст</th>
                                 <th>Номер телефона</th>
-                                <th></th>
-                                <th>Действие</th>
+                            @if (User.Identity.IsAuthenticated && !User.IsInRole("Doctor"))
+                                {
+                                    <th></th>
+                                }
+                            <th>Действие</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -49,9 +55,13 @@
                                     }
                                     </td>
                                     <td>@patient.PhoneNumber</td>
-                                    <td>
-                                        <a href="/ReceptionCreate?patientid=@patient.Id" class="table-btn table-btn--reg second-btn">Записать</a>
-                                    </td>
+                                    @if (User.Identity.IsAuthenticated && !User.IsInRole("Doctor"))
+                                    {
+                                        <td>
+                                            <a href="/ReceptionCreate?patientid=@patient.Id" class="table-btn table-btn--reg second-btn">Записать</a>
+                                        </td>
+                                    }
+                                    
                                     <td>
                                         <a href="/PatientDetails?id=@patient.Id" class="table-btn table-btn--info second-btn">Подробности</a>
                                     </td>

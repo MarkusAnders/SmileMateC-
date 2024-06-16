@@ -7,12 +7,12 @@ using SmileMate.Common.Entities;
 
 namespace SmileMate.Pages
 {
-    public class DoctorPatient : PageModel
+    public class DoctorPatientCompleted : PageModel
     {
         private readonly SmileMateContext _context;
         private readonly UserManager<User> _userManager;
 
-        public DoctorPatient(SmileMateContext context, UserManager<User> userManager)
+        public DoctorPatientCompleted(SmileMateContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;

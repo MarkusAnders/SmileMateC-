@@ -27,10 +27,33 @@ namespace SmileMate.Pages
 
             Patient = await _context.Set<Patient>().FirstOrDefaultAsync(p => p.Id == patientid);
 
-            for(int i = 0; i <= 7; i++)
-                ThisWeek.Add(DateTime.Now.AddDays(i));
-            
+            DateTime currentDate = DateTime.Now;
+            int daysToAdd = 0;
+
+            while (ThisWeek.Count < 22)
+            {
+                // Проверяем, что день не суббота и не воскресенье
+                if (currentDate.AddDays(daysToAdd).DayOfWeek != DayOfWeek.Saturday &&
+                    currentDate.AddDays(daysToAdd).DayOfWeek != DayOfWeek.Sunday)
+                {
+                    ThisWeek.Add(currentDate.AddDays(daysToAdd));
+                }
+                daysToAdd++;
+            }
+
             return Page();
         }
+
+        //public async Task<IActionResult> OnGet(int? patientid)
+        //{
+        //    Doctors = await _context.Set<Doctor>().ToListAsync();
+
+        //    Patient = await _context.Set<Patient>().FirstOrDefaultAsync(p => p.Id == patientid);
+
+        //    for(int i = 0; i <= 21; i++)
+        //        ThisWeek.Add(DateTime.Now.AddDays(i));
+
+        //    return Page();
+        //}
     }
 }

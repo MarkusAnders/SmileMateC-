@@ -1,15 +1,15 @@
 ﻿@page
-@model ReceptionModel
+@model ReceptionCompleted
 @{
-    ViewData["Title"] = "SmileMate - Приемы";
+    ViewData["Title"] = "SmileMate - Завершенные приемы";
 }
 
 
 <section class="reception">
     <div class="container">
         <div class="reception-wrapper">
-            <h1 class="reception-title main-title">Активные приемы</h1>
-            <a asp-page="/ReceptionCompleted" class="reception-link--reception">Завершенные приемы</a>
+            <h1 class="reception-title main-title">Завершенные приемы</h1>
+            <a asp-page="/Reception" class="reception-link--reception">Активные приемы</a>
             <form method="get" class="reception-search search">
                 <div class="search-wrapper">
                 <input name="searchTerm" type="text" class="instrument-search--input search-input" placeholder="Поиск...">
@@ -31,14 +31,12 @@
                             {
                                 <th></th>
                             }
-                            
                         </tr>
                     </thead>
                     <tbody id="receptionTableBody">
                         @foreach(var reception in Model.Receptions)
                         {
-                            var receptionDateTime = new DateTime(reception.Date.Year, reception.Date.Month, reception.Date.Day, reception.Time.Hour, reception.Time.Minute, reception.Time.Second);
-                            <tr class="reception-row" data-date="@reception.Date" data-time="@reception.Time" data-datetime="@receptionDateTime.ToString("yyyy-MM-ddTHH:mm:ss")">
+                            <tr class="reception-row" data-date="@reception.Date" data-time="@reception.Time">
                                 <td>@reception.Client.Surname @reception.Client.Name @reception.Client.Patronymic</td>
                                 <td>@reception.Doctor.Surname @reception.Doctor.Name @reception.Doctor.Patronymic</td>
                                 <td>@reception.Date.ToLongDateString()</td>

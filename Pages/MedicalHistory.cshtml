@@ -9,23 +9,31 @@
         <div class="container">
             <div class="history-wrapper">
                 <div class="history-top">
-                <a asp-page="" class="history-nametitle">@Model.Patient.Surname @Model.Patient.Name @Model.Patient.Patronymic</a>
-                    <div class="history-border"></div>
+                    <div class="history-top--item">
+                        <p class="history-nametitle">@Model.Patient.Surname @Model.Patient.Name @Model.Patient.Patronymic</p>
+                        @* @if (User.Identity.IsAuthenticated && !User.IsInRole("Doctor"))
+                        {
+                            <a class="reference-medical"> Создать справу об оплате медицинских услуг</a>
+                        } *@
+                    </div>
                     <form method="get" class="history-search">
                         <div class="search-wrapper">
                             <input name="searchTerm" type="text" class="history-search--input search-input" placeholder="Поиск...">
+                            <input type="hidden" name="patientid" value="@Model.Patient.Id"/>
                             <button class="instrument-search--btn">
                                 <img class="instrument-search--icon" src="/img/icon/search.svg">
                             </button>
                         </div>
                     </form>
+                    
+                    
                 </div>
                 <div class="history-bottom">
                     <ul class="history-list">
                         @foreach(var mh in Model.MedicalHystory)
                         {
                             <li class="history-item">
-                                <a asp-page="/MedicalDisease?@mh.Id" class="history-link">
+                                <a href="/MedicalDisease?mhid=@mh.Id" class="history-link">
                                     <div class="history-card">
                                         <div class="history-content">
                                             <p class="history-card-date">@mh.Reception.Date</p>

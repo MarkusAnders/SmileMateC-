@@ -23,9 +23,14 @@ namespace SmileMate.Pages
 
         [BindProperty]
         public Reception Reception { get; set; }
+        [BindProperty]
+        public string RouteValue { get; set; }
 
-        public async Task<IActionResult> OnGet(int? receptionid)
+        public async Task<IActionResult> OnGet(int? receptionid, string? routevalue)
         {
+            if(routevalue is not null)
+                RouteValue = routevalue;
+
             Reception = await _context.Set<Reception>()
                 .Include(r => r.Client)
                 .Include(r => r.MedicalHistory)
@@ -90,6 +95,9 @@ namespace SmileMate.Pages
 
             reception.MedicalHistory.Add(medicalHistory);
             await _context.SaveChangesAsync();
+
+            if(RouteValue is not null)
+                return RedirectToPage("/DoctorPatient");
 
             return RedirectToPage("/Reception");
         }

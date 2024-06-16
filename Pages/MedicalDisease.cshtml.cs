@@ -1,20 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using SmileMate.Common;
+using SmileMate.Common.Entities;
 
 namespace SmileMate.Pages
 {
     public class MedicalDiseaseModel : PageModel
     {
-        private readonly ILogger<MedicalDiseaseModel> _logger;
+        private readonly SmileMateContext _context;
 
-        public MedicalDiseaseModel(ILogger<MedicalDiseaseModel> logger)
+        public MedicalDiseaseModel(SmileMateContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public void OnGet()
-        {
+        [BindProperty]
+        public MedicalHistory MedicalHistory { get; set; }
 
+        public async Task<IActionResult> OnGet(int? mhid)
+        {
+            MedicalHistory = await _context.Set<MedicalHistory>()
+                .Include(mh => mh.Reception).ThenInclude(r => r.Client)
+                .Include(mh => mh.Reception).ThenInclude(r => r.Doctor)
+                .FirstOrDefaultAsync(mh => mh.Id == mhid);
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPost(int? mhid, int? patientid)
+        {
+            var mhToDelete = await _context.Set<MedicalHistory>().FirstOrDefaultAsync(mh => mh.Id == mhid);
+
+            _context.Remove(mhToDelete);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("/MedicalHistory", new { patientid = patientid });
         }
     }
 }

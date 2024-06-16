@@ -13,15 +13,15 @@
                 <div class="disease-form--top">
                     <div class="disease-form--left">
                         <label class="input-label">Диагноз</label>
-                        <input name="diagnosis" type="text" class="input-disease form-input input" placeholder="Укажите диагноз">
+                        <input required name="diagnosis" type="text" class="input-disease form-input input" placeholder="Укажите диагноз">
                     </div>
                     <div class="disease-form--rigth">
                         <label class="input-label">Стоимость лечения</label>
-                        <input name="price" type="text" class="input-price form-input input" placeholder="Укажите цену" />
+                        <input required name="price" type="number" class="input-price form-input input" placeholder="Укажите цену" />
                     </div>
                 </div>
                 <label class="input-label">Комментарий врача</label>
-                <textarea name="comment" type="text" class="input-comment form-input input" placeholder="Введите.."></textarea>
+                <textarea required name="comment" type="text" class="input-comment form-input input" placeholder="Введите.."></textarea>
 
                 <div class="upload-container">
                     <div class="upload-zone_dragover" id="dropZone">
@@ -39,7 +39,7 @@
                     <div id="previewContainer" class="preview-container"></div>
                 </div>
 
-                <div class="disease-btns">
+                <div class="disease-btns disease-btns--create">
                     <button type="submit" class="disease-btn main-btn">Создать</button>
                     <a asp-page="/Reception" class="disease-btn disease-btn--back second-btn">Назад</a>
                 </div>

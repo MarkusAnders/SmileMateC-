@@ -55,6 +55,17 @@ namespace SmileMate.Pages
 
             var receptionsToTime = receptions.Where(r => r.Date == DateOnly.Parse(selecteddate)).Select(r => r.Time).ToList();
 
+            // Получить текущее время
+            DateTime now = DateTime.Now;
+            DateOnly currentDate = DateOnly.FromDateTime(now);
+            TimeOnly currentTime = TimeOnly.FromDateTime(now);
+
+            // Если выбранная дата совпадает с текущей датой, исключить прошедшее время
+            if (DateOnly.Parse(selecteddate) == currentDate)
+            {
+                times = times.Where(t => t > currentTime).ToList();
+            }
+
             Times = times.Except(receptionsToTime).ToList();
 
             return Page();

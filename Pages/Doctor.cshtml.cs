@@ -38,7 +38,12 @@ namespace SmileMate.Pages
 
         public async Task<IActionResult> OnPostAsync(int? doctorid)
         {
-            var doctor = await _context.Set<User>().FirstOrDefaultAsync(d => d.Id == doctorid);
+            var doctor = await _context.Set<Doctor>()
+                .Include(d => d.Receptions)
+                .FirstOrDefaultAsync(d => d.Id == doctorid);
+
+            if (doctor.Receptions.Count() != 0)
+                return NotFound("Вы не можете удалить доктора, так как у него есть приемы");
 
             _context.Remove(doctor);
             await _context.SaveChangesAsync();
