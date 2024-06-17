@@ -18,7 +18,7 @@ namespace SmileMate.Common
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Database=CoursePlatform;Username=postgres;Password=admin");
+            optionsBuilder.UseNpgsql("Host=localhost;Database=SmileMate;Username=postgres;Password=admin");
         }
     }
 }
