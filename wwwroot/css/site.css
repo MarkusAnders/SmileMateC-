@@ -1767,17 +1767,40 @@ select::-ms-expand {
   position: relative;
 }
 
-.toggle-password svg{
-  position: absolute;
-  top: 18px;
-  right: 15px;
-  fill: var(--Subtitle);
-  transition: all .3s ease;
+.password-wrapper--patient{
+	display: flex;
+	flex-direction: column;
 }
 
-.toggle-password svg:hover{
-  fill: var(--BtnBG);
-  transition: all .3s ease;
+.password-wrapper--profile{
+	display: flex;
+	flex-direction: column;
+}
+
+.password-wrapper-reg {
+	display: flex;
+	flex-direction: column;
+}
+
+.toggle-password svg {
+	position: absolute;
+	top: 18px;
+	right: 15px;
+	fill: var(--Subtitle);
+	transition: all .3s ease;
+}
+
+.toggle-password--patient svg {
+	top: 38px;
+}
+
+.toggle-password--reg{
+	top: 40px;
+}
+
+.toggle-password svg:hover {
+	fill: var(--BtnBG);
+	transition: all .3s ease;
 }
 
 .toggle-password svg:hover,
