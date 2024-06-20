@@ -8,7 +8,7 @@
     <div class="container">
         <h2 class="reception-create--title main-title">Запись на прием</h2>
         <div class="reception-create--wrapper">
-            <h2 class="popup-title reception-patient">Тихонов Сергей Денисович</h2>
+            <h2 class="popup-title reception-patient">@Request.Query["patientSurname"] @Request.Query["patientName"] @Request.Query["patientPatronymic"]</h2>
                 <form method="post" class="popup-form">
                     <label class="input-label">Время</label>
                     <div class="select">

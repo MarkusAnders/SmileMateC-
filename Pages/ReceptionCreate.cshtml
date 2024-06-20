@@ -34,7 +34,10 @@
                         </select>
                     </div>
                     <input type="hidden" name="patientid" value="@Model.Patient.Id"/>
-                    <button asp-page="/ReceptionCreateTime" class="popup-btn main-btn">Записаться</button>
+                    <input type="hidden" name="patientSurname" value="@Model.Patient.Surname" />
+                    <input type="hidden" name="patientName" value="@Model.Patient.Name" />
+                    <input type="hidden" name="patientPatronymic" value="@Model.Patient.Patronymic" />
+                    <button asp-page="/ReceptionCreateTime" class="popup-btn main-btn">Выбрать время</button>
                 </form>
         </div>
     </div>

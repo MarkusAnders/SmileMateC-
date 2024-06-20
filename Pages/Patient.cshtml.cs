@@ -32,6 +32,8 @@ namespace SmileMate.Pages
                     || p.PhoneNumber.Contains(searchTerm));
             }
 
+            query = query.OrderBy(p => p.Surname);
+
             Patients = await query.ToListAsync();
 
             return Page();

@@ -20,6 +20,12 @@ namespace SmileMate.Pages
         public List<TimeOnly> Times { get; set; } = new();
         [BindProperty]
         public TempDoctorDate DoctorDate { get; set; }
+        [BindProperty]
+        public string PatientSurname { get; set; }
+        [BindProperty]
+        public string PatientName { get; set; }
+        [BindProperty]
+        public string PatientPatronymic { get; set; }
         public async Task<IActionResult> OnGet(int? selecteddoctor, string? selecteddate, int? patientid)
         {
             DoctorDate = new TempDoctorDate();

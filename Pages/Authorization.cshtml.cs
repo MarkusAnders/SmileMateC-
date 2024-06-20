@@ -241,8 +241,9 @@ namespace SmileMate.Pages
 
         private string GenerateEmailBody(string username, string password)
         {
-            var body = $"<h1>Ваш логин: {username}</h1>" +
-                       $"<p>Ваш пароль: {password}</p>";
+            var body = $"<div style=\"border-radius: 8px; background-color: #F2f2f2; padding: 20px 30px;\">" +
+                       $"<p style=\"font-size: 32px; font-weight: 500;\">Ваш логин: {username}</p>" +
+                       $"<p style=\"font-size: 32px; font-weight: 500;\">Ваш пароль: {password}</p>";
 
             return body;
         }
